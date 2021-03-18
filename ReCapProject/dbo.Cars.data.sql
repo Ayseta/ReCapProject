@@ -1,0 +1,5 @@
+﻿INSERT INTO [dbo].[Cars] ([CarId], [BrandId], [ColorId], [ModelYear], [DailyPrice], [Description]) VALUES (1, N'1    ', N'1    ', N'2010      ', CAST(129 AS Decimal(18, 0)), N'EKONOMIK')
+INSERT INTO [dbo].[Cars] ([CarId], [BrandId], [ColorId], [ModelYear], [DailyPrice], [Description]) VALUES (2, N'2    ', N'1    ', N'2015      ', CAST(215 AS Decimal(18, 0)), N'ORTA SINIF')
+INSERT INTO [dbo].[Cars] ([CarId], [BrandId], [ColorId], [ModelYear], [DailyPrice], [Description]) VALUES (3, N'3    ', N'2    ', N'2018      ', CAST(349 AS Decimal(18, 0)), N'LUX SINIF')
+INSERT INTO [dbo].[Cars] ([CarId], [BrandId], [ColorId], [ModelYear], [DailyPrice], [Description]) VALUES (4, N'4    ', N'3    ', N'2018      ', CAST(289 AS Decimal(18, 0)), N'SUV')
+INSERT INTO [dbo].[Cars] ([CarId], [BrandId], [ColorId], [ModelYear], [DailyPrice], [Description]) VALUES (5, N'2    ', N'2    ', N'2020      ', CAST(990 AS Decimal(18, 0)), N'PREMIUM')
