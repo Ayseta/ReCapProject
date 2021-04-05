@@ -25,10 +25,10 @@ namespace Business.Concrete
         {
             if (car.DailyPrice>10 && car.CarName.Length>5)
             {
+                _carDal.Add(car);
                 return new SuccessResult(Messages.CarAdded);
             }
-            _carDal.Add(car);
-
+          
             return new ErrorResult(Messages.CarNameInvalid);
         }
 
@@ -40,7 +40,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll() 
         {
-            if (DateTime.Now.Hour==22)
+            if (DateTime.Now.Hour==18)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }

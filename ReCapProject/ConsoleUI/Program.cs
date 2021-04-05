@@ -9,9 +9,19 @@ namespace ConsoleUI
     class Program
     {
         static void Main (string[] args)
+
         {
-            BrandTest();
-            CarTest();
+            UserTest();
+
+            CustomerTest();
+
+            RentalTest();
+
+            GetRentailDetailsTest();
+
+
+            //BrandTest();
+            //CarTest();
 
             //GetCarsById();
             //GetCarsByColorId();
@@ -22,10 +32,49 @@ namespace ConsoleUI
             //GetCarDetailsTest();
 
         }
+
+        private static void RentalTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            var result8 = rentalManager.Add(new Rental
+            { CustomerId = 1, CarId = 3, RentDate = DateTime.Now, ReturnDate = new DateTime(2021, 4, 8) });
+            Console.WriteLine(result8.Message);
+        }
+
+        private static void CustomerTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            var result7 = customerManager.Add(new Customer { UserId = 2, CompanyName = "Kuyu Grup" });
+            Console.WriteLine(result7.Message);
+        }
+
+        private static void UserTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            var result6 = userManager.Add(new User
+            { FirstName = "Şahika", LastName = "Çelebi", Email = "shkace@mail.com", Password = "5417" });
+            Console.WriteLine(result6.Message);
+        }
+
+        private static void GetRentailDetailsTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            var result9 = rentalManager.GetRentalDetails();
+            if (result9.Success)
+            {
+                foreach (var rental in result9.Data)
+                {
+                    Console.WriteLine(rental.UserName + rental.RentDate + "\t " + rental.ReturnDate);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result9.Message);
+            }
+        }
+
         private static void BrandTest()
         {
-            Console.WriteLine("Filo:");
-
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             var result = brandManager.GetAll();
             foreach (var brand in result.Data)
@@ -36,8 +85,6 @@ namespace ConsoleUI
 
         private static void CarTest()
         {
-            Console.WriteLine("\n" + "Araçları açıklama ve günlük fiyata göre listele:");
-
             CarManager carManager = new CarManager(new EfCarDal());
 
             var result = carManager.GetAll();
@@ -56,7 +103,6 @@ namespace ConsoleUI
 
         private static void GetCarDetailsTest()
         {
-            Console.WriteLine("Mevcut araçlar listesi:");
             CarManager carManager = new CarManager(new EfCarDal());
             var result5 = carManager.GetCarDetails();
             foreach (var car in result5.Data)
@@ -82,7 +128,6 @@ namespace ConsoleUI
 
         private static void GetCarsByColorId()
         {
-            Console.WriteLine("\n" + "Beyaz olan araçların sınıf ve modeli:");
 
             CarManager carManager = new CarManager(new EfCarDal());
             var result2 = carManager.GetCarsByColorId((1));
@@ -94,7 +139,6 @@ namespace ConsoleUI
 
         private static void GetCarsById()
         {
-            Console.WriteLine("\n" + "2 numaralı araçların sınıf ve modeli:");
             CarManager carManager = new CarManager(new EfCarDal());
             var result1 = carManager.GetCarsByBrandId((3));
             foreach (var car in result1.Data)
