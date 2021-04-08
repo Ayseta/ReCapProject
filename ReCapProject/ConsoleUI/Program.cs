@@ -11,13 +11,13 @@ namespace ConsoleUI
         static void Main (string[] args)
 
         {
-            UserTest();
+            //UserTest();
 
-            CustomerTest();
+            //CustomerTest();
 
-            RentalTest();
+            //RentalTest();
 
-            GetRentailDetailsTest();
+            //GetRentailDetailsTest();
 
 
             //BrandTest();
@@ -25,9 +25,9 @@ namespace ConsoleUI
 
             //GetCarsById();
             //GetCarsByColorId();
-
-            //AddedTest();
-            //DeleteTest();
+            
+            //CarAddTest();
+            //CarDeleteTest();
 
             //GetCarDetailsTest();
 
@@ -60,7 +60,7 @@ namespace ConsoleUI
         {
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             var result9 = rentalManager.GetRentalDetails();
-            if (result9.Success)
+            if (result9.Success==false)
             {
                 foreach (var rental in result9.Data)
                 {
@@ -111,18 +111,18 @@ namespace ConsoleUI
             }
         }
 
-        private static void DeleteTest()
+        private static void CarDeleteTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            var result4 = carManager.Delete(new Car { CarId = 6 });
+            var result4 = carManager.Delete(new Car { CarId = 2010 });
             Console.WriteLine(result4.Message);
         }
 
-        private static void AddedTest()
+        private static void CarAddTest()
         {
 
             CarManager carManager = new CarManager(new EfCarDal());
-            var resul3 = carManager.Add(new Car { BrandId = 4, ColorId = 3, DailyPrice = 0, CarName = "None" });
+            var resul3 = carManager.Add(new Car { BrandId = 4, ColorId = 3, ModelYear=2021, DailyPrice =1500, Description="Premium", CarName="M Sport"});
             Console.WriteLine(resul3.Message);
         }
 
