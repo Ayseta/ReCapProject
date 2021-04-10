@@ -1,11 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,13 +25,17 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-            if (car.DailyPrice>0 && car.CarName.Length>=2)
+            var context = new ValidationContext<Car>(car);
+            CarValidator carValidator = new CarValidator();
+            var result = carValidator.Validate(context);
+
+            if (!result.IsValid)
             {
-                _carDal.Add(car);
-                return new SuccessResult(Messages.CarAdded);
+                throw new ValidationException(result.Errors);
             }
-          
-            return new ErrorResult(Messages.CarNameInvalid);
+            _carDal.Add(car);
+
+            return new SuccessResult(Messages.CarAdded);
         }
 
         public IResult Delete(Car car)
@@ -40,7 +46,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll() 
         {
-            if (DateTime.Now.Hour==07)
+            if (DateTime.Now.Hour==11)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }

@@ -11,7 +11,7 @@ namespace ConsoleUI
         static void Main (string[] args)
 
         {
-            //UserTest();
+            UserTest();
 
             //CustomerTest();
 
@@ -25,12 +25,24 @@ namespace ConsoleUI
 
             //GetCarsById();
             //GetCarsByColorId();
-            
+
             //CarAddTest();
             //CarDeleteTest();
 
             //GetCarDetailsTest();
 
+            //GetAll();
+
+        }
+
+        private static void GetAll()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            var result10 = userManager.GetAll();
+            foreach (var user in result10.Data)
+            {
+                Console.WriteLine(user.FirstName + user.LastName);
+            }
         }
 
         private static void RentalTest()
@@ -44,16 +56,23 @@ namespace ConsoleUI
         private static void CustomerTest()
         {
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-            var result7 = customerManager.Add(new Customer { UserId = 2, CompanyName = "Kuyu Grup" });
+            var result7 = customerManager.Add(new Customer { UserId = 3, CompanyName = "Argun Holding" });
             Console.WriteLine(result7.Message);
+
+            //var result11 = customerManager.Delete(new Customer { CustomerId = 4});
+            //Console.WriteLine(result11.Message);
         }
 
         private static void UserTest()
         {
             UserManager userManager = new UserManager(new EfUserDal());
             var result6 = userManager.Add(new User
-            { FirstName = "Şahika", LastName = "Çelebi", Email = "shkace@mail.com", Password = "5417" });
+            { FirstName = "Yıldız", LastName = "Argun", Email = "yildiz@mail.com", Password = "6547" });
             Console.WriteLine(result6.Message);
+
+            //var result12 = userManager.Delete(new User { UserId = 4 });
+            //Console.WriteLine(result12.Message);
+
         }
 
         private static void GetRentailDetailsTest()

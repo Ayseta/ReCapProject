@@ -1,9 +1,11 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -22,7 +24,7 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            if (rental.ReturnDate !=null)
+            if (rental.ReturnDate != null)
             {
                 _rentalDal.Add(rental);
                 return new SuccessResult(Messages.CarRented);
@@ -49,6 +51,7 @@ namespace Business.Concrete
 
         public IDataResult<List<RentalDetailDto>> GetRentalDetails(Expression<Func<Rental, bool>> filter = null)
         {
+            
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(filter),Messages.CarNotReturned);
         }
 
